@@ -1,1 +1,2 @@
 # BloomLogWebsite
+BloomLog is a web-based platform designed to help users manage and care for their plants more efficiently. The system provides an intuitive interface that allows users to register, log in, and organize their plant collection with ease. Through features such as adding, editing, filtering, and viewing plants, BloomLog simplifies plant care management while offering a clean, nature-inspired user experience.
