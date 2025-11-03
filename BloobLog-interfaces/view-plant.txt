@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BloomLog - Plant Details</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+
+.plant-detail-container {
+    display: flex;
+    gap: 30px;
+    align-items: stretch; 
+}
+
+.plant-detail-image {
+    flex: 1;
+    min-height: 400px; 
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.plant-detail-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    border-radius: 16px;
+}
+</style>
+
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <span class="logo-icon"><img src="image/logo.PNG" alt="bloomlog logo" width="130" height="100"></span>
+                    <h1>BloomLog</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="homepage.html"><i class="fas fa-home"></i> Home</a></li>
+                        <li><a href="index.html"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- View Plant Page -->
+    <section class="container">
+        <div class="form-header">
+            <h2>Plant Details</h2>
+            <a href="homepage.php" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Back to Garden</a>
+        </div>
+        <div class="plant-detail-container">
+            <div class="plant-detail-image card">
+                 <img src="image/snake.jpg" alt="Monstera Deliciosa" class="plant-img">
+            </div>
+            <div class="plant-detail-info card">
+                <h1 id="view-plant-nickname">Snakey</h1>
+                <p class="plant-species">Snake Plant</p>
+                
+                <div class="plant-details">
+                    <div class="detail-item">
+                        <span class="detail-label">Added On:</span>
+                        <span>Oct 1, 2023</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Watering Schedule:</span>
+                        <span>Every 14 days</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Last Watered:</span>
+                        <span>Oct 15, 2023</span>
+                    </div>
+                     <div class="detail-item">
+                        <span class="detail-label">Next Watering Date:</span>
+                        <span>In 0 day</span>
+                    </div>
+
+                    
+                    <div class="detail-item">
+                        <span class="detail-label">Status:</span>
+                        <span class="watering-status needs-water">Needs Watering</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Temperature:</span>
+                        <span class="Temperature">18C-30C</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Humidity:</span>
+                        <span class="Humidity">40%-60%</span>
+                    </div>
+                </div>
+                
+                <div class="watering-progress">
+                    <div class="watering-progress-bar" style="width: 30%"></div>
+                </div>
+                
+                <h3><br>Notes</h3>
+                <p>Growing well in the corner. Seems to be thriving in low light conditions.</p>
+                
+                <h3><br>Care Instructions</h3>
+
+                    <p><strong>Light:</strong> Prefers indirect sunlight.</p>
+                    <p><strong>Water:</strong> Allow soil to dry completely between waterings.</p>
+                    <p><strong>Soil:</strong> Well-draining potting mix recommended.</p>
+                
+                    
+                <div class="plant-detail-actions">
+                    <a href="edit-plant.html" class="btn btn-secondary">Edit Plant</a>
+                    <button class="btn" id="water-plant-btn">Water Now</button>
+                    <button class="btn btn-accent" id="remove-plant-btn">Remove Plant</button>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>BloomLog</h3>
+                    <p>Your personal plant management assistant.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="homepage.html"><i class="fas fa-home"></i> Home</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-envelope"></i> info@BloomLog.com</a></li>
+                        <li><a href="#"><i class="fas fa-phone"></i> (123) 456-7890</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 PlantCare. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Functionality for this page only
+        document.getElementById('water-plant-btn').addEventListener('click', function() {
+            document.querySelector('.watering-status').textContent = 'Watered';
+            document.querySelector('.watering-status').className = 'watering-status watered';
+            document.querySelector('.watering-progress-bar').style.width = '100%';
+            document.querySelector('.detail-item:nth-child(2) span:last-child').textContent = 'Just now';
+            alert('Plant watered successfully!');
+        });
+
+        document.getElementById('remove-plant-btn').addEventListener('click', function() {
+            if (confirm('Are you sure you want to remove this plant from your collection?')) {
+                window.location.href = 'homepage.html';
+            }
+        });
+    </script>
+</body>
+</html>
