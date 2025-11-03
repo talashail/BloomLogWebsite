@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlantCare - Add Plant</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+.plant-selection-container {
+    max-width: 800px;
+    margin: 30px auto;
+}
+
+.plant-option {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    border: 2px solid var(--light-gray);
+    border-radius: 16px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.plant-option:hover {
+    border-color: var(--primary-light);
+    background-color: rgba(76, 175, 80, 0.05);
+}
+
+.plant-option.selected {
+    border-color: var(--primary);
+    background-color: rgba(76, 175, 80, 0.1);
+}
+
+.plant-option input[type="radio"] {
+    margin-right: 20px;
+    transform: scale(1.5);
+}
+
+.plant-icon {
+   
+    margin-right: 20px;
+    
+   width: 80px;
+}
+
+.plant-details-text {
+    flex: 1;
+}
+
+.plant-name {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: var(--primary-dark);
+}
+
+.plant-description {
+    color: var(--gray);
+    margin-bottom: 10px;
+}
+
+.plant-care-info {
+    display: flex;
+    gap: 15px;
+    font-size: 14px;
+    color: var(--gray);
+}
+
+.care-item {
+    display: flex;
+    align-items: center;
+}
+
+.care-item i {
+    margin-right: 5px;
+    color: var(--primary);
+}
+
+
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <span class="logo-icon"><img src="image/logo.PNG" alt="bloomlog logo" width="130" height="100"></span>
+                    <h1>BloomLog</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="homepage.html"><i class="fas fa-home"></i> Home</a></li>
+                        <li><a href="index.html"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Add Plant Page -->
+    <section class="container">
+        <div class="plant-selection-container">
+            <div class="form-header">
+                <h2>Add a New Plant</h2>
+                <a href="homepage.html" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Back to HomePage</a>
+            </div>
+            <div class="card">
+                <p class="plant-selection-description">Choose a plant that suits your home environment.</p>
+                
+                <form id="add-plant-form" action="homepage.html" method="POST">
+                    <div class="form-group">
+                        <label for="plant-nickname">Plant Nickname *</label>
+                        <input type="text" id="plant-nickname" name="nickname" required>
+                        <div class="error-message">Please enter a nickname for your plant</div>
+                    </div>
+                    
+                    <h3>Select a Plant Type</h3>
+                    
+                    <div class="plant-option">
+                        <input type="radio"  name="plant-type" required>
+                        <img src="image/snake.JPG" alt="" class="plant-icon">
+                        <div class="plant-details-text">
+                            <div class="plant-name">Snake</div>
+                            <div class="plant-description">Low-maintenance, air-purifying</div>
+                            <div class="plant-care-info">
+                                <!--<div class="care-item">
+                                    <i class="fas fa-sun"></i> Low Light
+                                </div>-->
+                                <div class="care-item">
+                                    <i class="fas fa-tint"></i> Every 2 days
+                                </div>
+                                <div class="care-item">
+                                    <i class="fas fa-thermometer-half"></i> 65-85°C
+                                </div>
+                                <div class="care-item">
+                                   <i class="fas fa-water"></i> 40%–60% 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="plant-option">
+                        <input type="radio"  name="plant-type"  required>
+                     <img src="image/pothos.JPG" alt="" class="plant-icon">
+                        <div class="plant-details-text">
+                            <div class="plant-name">Pothos</div>
+                            <div class="plant-description">Trailing vines, easy to grow</div>
+                            <div class="plant-care-info">
+                                <!--<div class="care-item">
+                                    <i class="fas fa-sun"></i> Indirect Light
+                                </div>-->
+                                <div class="care-item">
+                                    <i class="fas fa-tint"></i> Every 5 days
+                                </div>
+                                <div class="care-item">
+                                    <i class="fas fa-thermometer-half"></i> 65-85°C
+                                </div>
+                                <div class="care-item">
+                                   <i class="fas fa-water"></i> 30%–40% 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="plant-option">
+                        <input type="radio"  name="plant-type"  required>
+                        <img src="image/calathea vittata.JPG" alt="" class="plant-icon">
+                        <div class="plant-details-text">
+                            <div class="plant-name">Calathea Vittata</div>
+                            <div class="plant-description">Elegant, fiddler-shaped leaves</div>
+                            <div class="plant-care-info">
+                               <!-- <div class="care-item">
+                                    <i class="fas fa-sun"></i> Bright Light
+                                </div>-->
+                                <div class="care-item">
+                                    <i class="fas fa-tint"></i> Every 10 days
+                                </div>
+                                <div class="care-item">
+                                    <i class="fas fa-thermometer-half"></i> 60-75°C
+                                </div>
+                               <div class="care-item">
+                                   <i class="fas fa-water"></i> 60%–80% 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="plant-notes">Care Notes (Optional)</label>
+                        <textarea id="plant-notes" name="notes" rows="3" placeholder="Add any special care instructions or notes about your plant..."></textarea>
+                    </div>
+                    <input type="submit" value="Add Plant" class="btn">
+                    <!--<button type="submit" class="btn">Add Plant </button>-->
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>BloomLog</h3>
+                    <p>Your personal plant management assistant.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="homepage.html"><i class="fas fa-home"></i> Home</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-envelope"></i> info@plantcare.com</a></li>
+                        <li><a href="#"><i class="fas fa-phone"></i> (123) 456-7890</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 BloomLog. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Plant selection and form validation for this page only
+        document.querySelectorAll('.plant-option').forEach(option => {
+            option.addEventListener('click', function() {
+                const radio = this.querySelector('input[type="radio"]');
+                radio.checked = true;
+                updatePlantSelectionUI();
+                validateAddPlantForm();
+            });
+        });
+
+        document.getElementById('plant-nickname').addEventListener('input', validateAddPlantForm);
+
+        function updatePlantSelectionUI() {
+            document.querySelectorAll('.plant-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            const selectedRadio = document.querySelector('input[name="plant-type"]:checked');
+            if (selectedRadio) {
+                selectedRadio.closest('.plant-option').classList.add('selected');
+            }
+        }
+
+        function validateAddPlantForm() {
+            const nickname = document.getElementById('plant-nickname').value.trim();
+            const selectedPlant = document.querySelector('input[name="plant-type"]:checked');
+            const isValid = nickname !== '' && selectedPlant !== null;
+            
+            const nicknameGroup = document.getElementById('plant-nickname').closest('.form-group');
+            if (nickname === '') {
+                nicknameGroup.classList.add('error');
+            } else {
+                nicknameGroup.classList.remove('error');
+            }
+            
+            return isValid;
+        }
+
+        document.getElementById('add-plant-form').addEventListener('submit', function(e) {
+            if (!validateAddPlantForm()) {
+                e.preventDefault();
+                alert('Please select a plant type and enter a nickname for your plant.');
+            }
+        });
+    </script>
+</body>
+</html>
