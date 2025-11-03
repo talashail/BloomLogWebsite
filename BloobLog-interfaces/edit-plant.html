@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BloomLog - Edit Plant</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <span class="logo-icon"></span>
+                    <h1>BloomLog</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="homepage.html"><i class="fas fa-home"></i> Home</a></li>
+                        <li><a href="index.html"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Edit Plant Page -->
+    <section class="container">
+        <div class="form-container">
+            <div class="form-header">
+                <h2>Edit Plant</h2>
+                <a href="view-plant.html" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Back to Plant</a>
+            </div>
+            <div class="card">
+                <form id="edit-plant-form" action="view-plant.html" method="get">
+                    
+                    <!-- Editable Nickname -->
+                    <div class="form-group">
+                        <label for="edit-plant-nickname">Plant Nickname *</label>
+                        <input type="text" id="edit-plant-nickname" name="nickname" value="Snakey" required>
+                        <div class="error-message">Please enter a nickname for your plant</div>
+                    </div>
+
+                    <!-- Read-only Plant Info -->
+                    <div class="plant-info-display">
+                        <h3>Plant Information</h3>
+                        <div class="plant-details-readonly">
+                            <div class="detail-item">
+                                <span class="detail-label">Plant Type:</span>
+                                <span>Snake Plant</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Watering Schedule:</span>
+                                <span>Every 14 days</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Editable Last Watered Date -->
+                    <div class="form-group">
+                        <label for="edit-last-watered">Last Watering Date *</label>
+                        <input type="date" id="edit-last-watered" name="last_watered" value="2023-10-15" required>
+                    </div>
+
+                    <!-- Editable Notes -->
+                    <div class="form-group">
+                        <label for="edit-plant-notes">Care Notes (Optional)</label>
+                        <textarea id="edit-plant-notes" name="notes" rows="3" placeholder="Add any special care instructions or notes about your plant...">Growing well in the corner. Seems to be thriving in low light conditions.</textarea>
+                    </div>
+
+                    <button type="submit" class="btn">Update Plant</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>BloomLog</h3>
+                    <p>Your personal plant management assistant.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="homepage.html"><i class="fas fa-home"></i> Home</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-envelope"></i> info@bloomlog.com</a></li>
+                        <li><a href="#"><i class="fas fa-phone"></i> (123) 456-7890</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 BloomLog. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
