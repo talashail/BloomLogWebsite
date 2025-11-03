@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ploomlog - Admin Panel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <span class="logo-icon"><img src="image/logo.PNG" alt="bloomlog logo" width="130" height="100"></span>
+                    <h1>BloomLog</h1>
+                </div>
+                <nav>
+                    <ul>
+                       
+                        <li><a href="index.html"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Admin Panel Section -->
+    <section class="container">
+        <div class="dashboard-header">
+            <div class="user-info">
+                <div class="user-avatar">AD</div>
+                <div class="welcome-message">
+                    <h2>Welcome, Admin!</h2>
+                    <p><i class="fas fa-shield-alt"></i> Plant Catalog Management</p>
+                </div>
+            </div>
+            <button class="btn" id="toggle-form-btn">
+                <i class="fas fa-plus"></i> Add New Plant
+            </button>
+        </div>
+
+       
+
+        <!-- Add New Plant Form (Hidden by default) -->
+        <div class="card add-plant-form-container" id="add-plant-form" style="display: none;">
+            <div class="form-header">
+                <h2><i class="fas fa-plus-circle"></i> Add New Plant to Catalog</h2>
+                <button type="button" class="btn btn-secondary" id="close-form-btn">
+                    <i class="fas fa-times"></i> Close
+                </button>
+            </div>
+            <form id="add-catalog-plant-form" class="add-plant-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="plantName">Plant Name *</label>
+                        <input type="text" id="plantName" name="plantName" placeholder="Snake Plant" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="wateringfrequency">Watering Frequency (days) *</label>
+                        <input type="number" id="wateringfrequency" name="wateringfrequency" placeholder="14" min="1" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="mintemperature">Min Temperature (°C) *</label>
+                        <input type="number" id="mintemperature" name="mintemperature" placeholder="18.00" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="maxtemperature">Max Temperature (°C) *</label>
+                        <input type="number" id="maxtemperature" name="maxtemperature" placeholder="30.00" step="0.01" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="minhumidity">Min Humidity (%) *</label>
+                        <input type="number" id="minhumidity" name="minhumidity" placeholder="40.00" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="maxhumidity">Max Humidity (%) *</label>
+                        <input type="number" id="maxhumidity" name="maxhumidity" placeholder="60.00" step="0.01" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="plant_Info">Plant Information *</label>
+                    <textarea id="plant_Info" name="plant_Info" rows="2" placeholder="Detailed information about the plant..." required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="plant_summary">Plant Summary *</label>
+                    <textarea id="plant_summary" name="plant_summary" rows="2" placeholder="Brief summary of the plant..." required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="image_path">Image URL *</label>
+                    <input type="url" id="image_path" name="image_path" placeholder="https://example.com/plant-image.jpg" required>
+                </div>
+
+                <div class="form-actions">
+                    <button type="reset" class="btn btn-secondary">Clear Form</button>
+                    <button type="submit" class="btn">Add Plant to Catalog</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Plants Catalog Management -->
+        <div class="card">
+            <h2><i class="fas fa-seedling"></i> Plant Catalog Management</h2>
+            <p>Manage the plant catalog available to all users</p>
+            
+            <div class="my-plants-list">
+                <!-- Plant 1 -->
+                <div class="my-plant-card card">
+                    <div class="plant-image">
+                        <img src="image/snake.JPG" alt="Snake Plant">
+                    </div>
+                    <div class="plant-nickname">Snake Plant</div>
+                    <div class="plant-species">Sansevieria trifasciata</div>
+                    <div class="plant-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Watering:</span>
+                            <span>Every 14 days</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Temperature:</span>
+                            <span>18°C - 30°C</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Humidity:</span>
+                            <span>40% - 60%</span>
+                        </div>
+                        
+                    </div>
+                    <p class="plant-info"><strong>Info:</strong> Low-maintenance, air-purifying plant perfect for beginners</p>
+                    <div class="plant-actions">
+                        <button class="btn btn-accent delete-catalog-btn">
+                            <i class="fas fa-trash"></i> Remove from Catalog
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Plant 2 -->
+                <div class="my-plant-card card">
+                    <div class="plant-image">
+                        <img src="image/pothos.jpg" alt="Pothos">
+                    </div>
+                    <div class="plant-nickname">Pothos</div>
+                    <div class="plant-species">Epipremnum aureum</div>
+                    <div class="plant-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Watering:</span>
+                            <span>Every 7 days</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Temperature:</span>
+                            <span>20°C - 32°C</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Humidity:</span>
+                            <span>50% - 70%</span>
+                        </div>
+                        
+                    </div>
+                    <p class="plant-info"><strong>Info:</strong> Trailing vine plant that's very easy to care for</p>
+                    <div class="plant-actions">
+                        <button class="btn btn-accent delete-catalog-btn">
+                            <i class="fas fa-trash"></i> Remove from Catalog
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Plant 3 -->
+                <div class="my-plant-card card">
+                    <div class="plant-image">
+                        <img src="image/Fiddle-Leaf.jpg" alt="Fiddle Leaf Fig">
+                    </div>
+                    <div class="plant-nickname">Fiddle Leaf Fig</div>
+                    <div class="plant-species">Ficus lyrata</div>
+                    <div class="plant-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Watering:</span>
+                            <span>Every 10 days</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Temperature:</span>
+                            <span>18°C - 27°C</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Humidity:</span>
+                            <span>60% - 80%</span>
+                        </div>
+                        
+                    </div>
+                    <p class="plant-info"><strong>Info:</strong> Popular indoor tree with large, violin-shaped leaves</p>
+                    <div class="plant-actions">
+                        <button class="btn btn-accent delete-catalog-btn">
+                            <i class="fas fa-trash"></i> Remove from Catalog
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+<footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>BloomLog</h3>
+                    <p>Your personal plant management assistant.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-envelope"></i> info@bloomlog.com</a></li>
+                        <li><a href="#"><i class="fas fa-phone"></i> (123) 456-7890</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 BloomLog. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Toggle form visibility
+        const toggleFormBtn = document.getElementById('toggle-form-btn');
+        const addPlantForm = document.getElementById('add-plant-form');
+        const closeFormBtn = document.getElementById('close-form-btn');
+
+        toggleFormBtn.addEventListener('click', function() {
+            if (addPlantForm.style.display === 'none') {
+                addPlantForm.style.display = 'block';
+                toggleFormBtn.innerHTML = '<i class="fas fa-minus"></i> Hide Form';
+                toggleFormBtn.classList.add('btn-secondary');
+                // Scroll to form
+                addPlantForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } else {
+                addPlantForm.style.display = 'none';
+                toggleFormBtn.innerHTML = '<i class="fas fa-plus"></i> Add New Plant';
+                toggleFormBtn.classList.remove('btn-secondary');
+            }
+        });
+
+        closeFormBtn.addEventListener('click', function() {
+            addPlantForm.style.display = 'none';
+            toggleFormBtn.innerHTML = '<i class="fas fa-plus"></i> Add New Plant';
+            toggleFormBtn.classList.remove('btn-secondary');
+        });
+
+        // Add new plant to catalog
+        document.getElementById('add-catalog-plant-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const formData = new FormData(this);
+            const plantName = formData.get('plantName');
+            const wateringFrequency = formData.get('wateringfrequency');
+            const minTemp = formData.get('mintemperature');
+            const maxTemp = formData.get('maxtemperature');
+            const minHumidity = formData.get('minhumidity');
+            const maxHumidity = formData.get('maxhumidity');
+            const plantInfo = formData.get('plant_Info');
+            const plantSummary = formData.get('plant_summary');
+            const imagePath = formData.get('image_path');
+            
+            // Create new plant card
+            const plantsList = document.querySelector('.my-plants-list');
+            const newPlantCard = document.createElement('div');
+            newPlantCard.className = 'my-plant-card card';
+            newPlantCard.innerHTML = `
+                <div class="plant-image">
+                    <img src="${imagePath}" alt="${plantName}" onerror="this.src='https://via.placeholder.com/300x200/4CAF50/white?text=Plant+Image'">
+                </div>
+                <div class="plant-nickname">${plantName}</div>
+                <div class="plant-species">${plantSummary}</div>
+                <div class="plant-details">
+                    <div class="detail-item">
+                        <span class="detail-label">Watering:</span>
+                        <span>Every ${wateringFrequency} days</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Temperature:</span>
+                        <span>${minTemp}°C - ${maxTemp}°C</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Humidity:</span>
+                        <span>${minHumidity}% - ${maxHumidity}%</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Users:</span>
+                        <span>0 users</span>
+                    </div>
+                </div>
+                <p class="plant-info"><strong>Info:</strong> ${plantInfo}</p>
+                <div class="plant-actions">
+                    <button class="btn btn-accent delete-catalog-btn">
+                        <i class="fas fa-trash"></i> Remove from Catalog
+                    </button>
+                </div>
+            `;
+            
+            // Add to the beginning of the list
+            plantsList.insertBefore(newPlantCard, plantsList.firstChild);
+            
+            // Add event listener to the new delete button
+            newPlantCard.querySelector('.delete-catalog-btn').addEventListener('click', function() {
+                if (confirm('Are you sure you want to remove this plant from the catalog?')) {
+                    newPlantCard.remove();
+                    updatePlantCount();
+                    alert('Plant removed from catalog');
+                }
+            });
+            
+            // Update stats
+            updatePlantCount();
+            
+            // Reset form and hide it
+            this.reset();
+            addPlantForm.style.display = 'none';
+            toggleFormBtn.innerHTML = '<i class="fas fa-plus"></i> Add New Plant';
+            toggleFormBtn.classList.remove('btn-secondary');
+            
+            // Scroll to the new plant
+            newPlantCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            
+            alert('Plant added to catalog successfully!');
+        });
+
+        // Delete plants from catalog
+        document.querySelectorAll('.delete-catalog-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                if (confirm('Are you sure you want to remove this plant from the catalog?')) {
+                    this.closest('.my-plant-card').remove();
+                    updatePlantCount();
+                    alert('Plant removed from catalog');
+                }
+            });
+        });
+
+        // Update plant count in stats
+        function updatePlantCount() {
+            const plantCount = document.querySelectorAll('.my-plant-card').length;
+            const statNumber = document.querySelector('.stat-number');
+            if (statNumber) {
+                statNumber.textContent = plantCount;
+            }
+        }
+    </script>
+</body>
+</html>
