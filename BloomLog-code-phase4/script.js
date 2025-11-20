@@ -3,7 +3,20 @@ function formatDate(dateString) {
     const options = { year: 'numeric', month: 'short', day: 'numeric' };
     return new Date(dateString).toLocaleDateString(undefined, options);
 }
+document.addEventListener("keydown", e => {
+    if (e.key === "Enter" || e.key === " ") {
+        if (document.activeElement && document.activeElement.click) {
+            document.activeElement.click();
+        }
+    }
+});
 
+document.querySelectorAll(".card, .btn, .plant-actions a, .plant-detail-image, .my-plant-card").forEach(el => {
+    if (!el.hasAttribute("tabindex")) {
+        el.setAttribute("tabindex", "0"); 
+        el.setAttribute("role", "button");
+    }
+});
 // Common form validation
 document.addEventListener('DOMContentLoaded', function() {
     // Add basic form validation to all forms
@@ -28,4 +41,5 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+
 });
