@@ -1,20 +1,37 @@
 <?php
+
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 session_start();
+
 // Prevent anyone from entering the page if NOT logged in
-if (!isset($_SESSION['userid'])) {
-    header("Location: index.php");
-    exit;
-}
+
 
 // ====== DATABASE CONNECTION ======
 $host = "localhost";
 $user = "root"; 
-$pass = "";
+$pass = "root";
 $db   = "bloomlog";
 
 $conn = mysqli_connect($host, $user, $pass, $db);
 if (!$conn) {
     die("Database Connection Error: " . mysqli_connect_error());
+}
+function getWeatherData($city) {
+    $apiKey = "7cb722d142511044ba2ed72897a0b183";
+    $url = "https://api.openweathermap.org/data/2.5/weather?q={$city}&appid={$apiKey}&units=metric";
+
+    $response = file_get_contents($url);
+    if (!$response) {
+        return ["temp" => 25.0, "humidity" => 50.0]; // fallback
+    }
+
+    $data = json_decode($response, true);
+
+    return [
+        "temp" => $data["main"]["temp"],
+        "humidity" => $data["main"]["humidity"]
+    ];
 }
 
 // ===================================================
@@ -22,8 +39,8 @@ if (!$conn) {
 // ===================================================
 $login_error = "";
 
+// في قسم LOGIN - غير جزء الـ header فقط
 if (isset($_POST["login"])) {
-
     $username = trim($_POST["username"]);
     $password = trim($_POST["password"]);
 
@@ -36,14 +53,18 @@ if (isset($_POST["login"])) {
     // 2. Check user
     if ($row = $result->fetch_assoc()) {
         if (password_verify($password, $row["password"])) {
-
             // 3. Store session
             $_SESSION["userid"] = $row["userid"];
             $_SESSION["username"] = $row["name"];
             $_SESSION["city"] = $row["city"];
+            $_SESSION["user_role"] = $row["role"];
 
-            // 4. Redirect
-            header("Location: homepage.html");
+            // 4. Redirect based on email
+            if ($row["email"] == "admin@ploomlog.com") {
+                header("Location: admin.php");
+            } else {
+                header("Location: homepage.php");
+            }
             exit;
 
         } else {
@@ -53,7 +74,6 @@ if (isset($_POST["login"])) {
         $login_error = "User not found.";
     }
 }
-
 // ===================================================
 //                    SIGNUP SECTION
 // ===================================================
@@ -69,8 +89,9 @@ if (isset($_POST["signup"])) {
     $city      = trim($_POST["city"]);
 
     // Default values (your DB requires them)
-    $humidity = 50.00;
-    $temp     = 25.00;
+   $weather = getWeatherData($city);
+$humidity = $weather["humidity"];
+$temp = $weather["temp"];
     $createdAt = date("Y-m-d");
 
     // 1. Check if email exists
@@ -111,7 +132,7 @@ if (isset($_POST["signup"])) {
             $_SESSION["city"] = $city;
 
             // 5. Redirect
-            header("Location: homepage.html");
+            header("Location: homepage.php");
             exit;
 
         } else {
@@ -204,12 +225,71 @@ if (isset($_POST["signup"])) {
 
             <div class="form-group">
                 <label>City</label>
-                <select name="city" required>
-                    <option value="">Choose your city</option>
-                    <option value="Riyadh">Riyadh</option>
-                    <option value="Jeddah">Jeddah</option>
-                    <option value="Khobar">Khobar</option>
-                </select>
+             <select name="city" required>
+    <option value="">Choose your city</option>
+
+    <!-- ---------------- Saudi Arabia ---------------- -->
+    <optgroup label="Saudi Arabia">
+        <option value="Riyadh">Riyadh</option>
+        <option value="Jeddah">Jeddah</option>
+        <option value="Mecca">Mecca</option>
+        <option value="Medina">Medina</option>
+        <option value="Dammam">Dammam</option>
+        <option value="Khobar">Khobar</option>
+        <option value="Dhahran">Dhahran</option>
+        <option value="Abha">Abha</option>
+        <option value="Khamis Mushait">Khamis Mushait</option>
+        <option value="Jazan">Jazan</option>
+        <option value="Najran">Najran</option>
+        <option value="Tabuk">Tabuk</option>
+        <option value="Hail">Hail</option>
+        <option value="Taif">Taif</option>
+        <option value="Al Baha">Al Baha</option>
+        <option value="Al Qassim">Al Qassim</option>
+        <option value="Buraidah">Buraidah</option>
+        <option value="Sakaka">Sakaka</option>
+        <option value="Arar">Arar</option>
+        <option value="Yanbu">Yanbu</option>
+        <option value="Rabigh">Rabigh</option>
+        <option value="Al Jubail">Al Jubail</option>
+        <option value="Al Ahsa">Al Ahsa</option>
+        <option value="Al Qatif">Al Qatif</option>
+    </optgroup>
+
+    <!-- ---------------- International ---------------- -->
+    <optgroup label="International">
+        <option value="Dubai">Dubai</option>
+        <option value="Abu Dhabi">Abu Dhabi</option>
+        <option value="Manama">Manama</option>
+        <option value="Doha">Doha</option>
+        <option value="Kuwait City">Kuwait City</option>
+        <option value="Muscat">Muscat</option>
+
+        <option value="Cairo">Cairo</option>
+        <option value="Alexandria">Alexandria</option>
+
+        <option value="London">London</option>
+        <option value="Paris">Paris</option>
+        <option value="Berlin">Berlin</option>
+        <option value="Rome">Rome</option>
+        <option value="Madrid">Madrid</option>
+        <option value="Athens">Athens</option>
+
+        <option value="New York">New York</option>
+        <option value="Los Angeles">Los Angeles</option>
+        <option value="Chicago">Chicago</option>
+        <option value="Toronto">Toronto</option>
+        <option value="Vancouver">Vancouver</option>
+
+        <option value="Tokyo">Tokyo</option>
+        <option value="Osaka">Osaka</option>
+        <option value="Seoul">Seoul</option>
+        <option value="Singapore">Singapore</option>
+        <option value="Bangkok">Bangkok</option>
+        <option value="Hong Kong">Hong Kong</option>
+    </optgroup>
+</select>
+
             </div>
 
             <button type="submit" class="btn" name="signup">Sign Up</button>
