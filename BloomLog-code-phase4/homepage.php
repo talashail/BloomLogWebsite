@@ -1,4 +1,6 @@
 <?php
+require_once "config.php";
+
 session_start();
 
 // التحقق من تسجيل الدخول - استخدام userid بدل user_id
@@ -250,4 +252,5 @@ foreach ($user_plants as $plant) {
         });
     </script>
 </body>
+
 </html>
