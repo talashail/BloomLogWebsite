@@ -1,4 +1,6 @@
 <?php
+require_once "config.php";
+
 session_start();
 
 // التحقق من أن المستخدم مسجل دخوله
@@ -324,4 +326,5 @@ if (isset($_GET['delete_plant'])) {
         });
     </script>
 </body>
+
 </html>
