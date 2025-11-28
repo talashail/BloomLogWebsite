@@ -1,4 +1,6 @@
 <?php
+require_once "config.php";
+
 session_start();
 
 // 1️⃣ Ensure user is logged in
@@ -65,28 +67,56 @@ $plant = [
 // 5️⃣ Handle form submission
 $error = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
     $nickname_new = trim($_POST['nickname']);
     $last_watered_new = $_POST['last_watered'];
     $notes_new = trim($_POST['notes']);
 
-    // Calculate next_watered_date
-    $next_watered_new = date('Y-m-d', strtotime("+{$plant['wateringfrequency']} days", strtotime($last_watered_new)));
+    // Validation
+    if (empty($nickname_new)) {
+        $error = "⚠ Nickname is required.";
+    } elseif (!preg_match("/^[a-zA-Z0-9\s]+$/", $nickname_new)) {
+        $error = "⚠ Nickname can only contain letters and numbers.";
+    } elseif (!empty($notes_new) && !preg_match("/^[a-zA-Z0-9\s]+$/", $notes_new)) {
+        $error = "⚠ Notes can only contain letters and numbers.";
+    } elseif (empty($last_watered_new)) {
+        $error = "⚠ Please select the last watered date.";
+    }
 
-    // Update plant
-    $update = $conn->prepare("
-        UPDATE userplants
-        SET nickname = ?, last_watered_date = ?, next_watered_date = ?, notes = ?
-        WHERE user_plant_id = ? AND user_id = ?
-    ");
-    $update->bind_param("ssssii", $nickname_new, $last_watered_new, $next_watered_new, $notes_new, $userPlantID, $userID);
+    // If validation failed → stop here
+    if (empty($error)) {
 
-    if ($update->execute()) {
-        header("Location: view-plant.php?id=$userPlantID");
-        exit;
-    } else {
-        $error = "⚠ Failed to update plant. Please try again.";
+        // Calculate next_watered_date
+        $next_watered_new = date(
+            'Y-m-d',
+            strtotime("+{$plant['wateringfrequency']} days", strtotime($last_watered_new))
+        );
+
+        // Update plant
+        $update = $conn->prepare("
+            UPDATE userplants
+            SET nickname = ?, last_watered_date = ?, next_watered_date = ?, notes = ?
+            WHERE user_plant_id = ? AND user_id = ?
+        ");
+        $update->bind_param(
+            "ssssii",
+            $nickname_new,
+            $last_watered_new,
+            $next_watered_new,
+            $notes_new,
+            $userPlantID,
+            $userID
+        );
+
+        if ($update->execute()) {
+            header("Location: view-plant.php?id=$userPlantID");
+            exit;
+        } else {
+            $error = "⚠ Failed to update plant. Please try again.";
+        }
     }
 }
+
 ?>
 
 <!DOCTYPE html>
