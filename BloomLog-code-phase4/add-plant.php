@@ -1,4 +1,6 @@
 <?php
+require_once "config.php";
+
 session_start();
 
  //1️⃣ Ensure user is logged in
