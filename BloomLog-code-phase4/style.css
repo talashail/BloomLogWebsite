@@ -661,3 +661,12 @@ footer {
     margin-bottom: 0;
 
 }
+.plant-detail-image img {
+    max-width: 100%;
+    max-height: 400px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 16px;
+}
+
