@@ -128,6 +128,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>BloomLog - Edit Plant</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <style>
+/* Toast container */
+#toast {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #f44336; /* أحمر للأخطاء */
+    color: white;
+    text-align: center;
+    border-radius: 4px;
+    padding: 16px;
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    z-index: 1000;
+    font-size: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+/* Show the toast */
+#toast.show {
+    visibility: visible;
+    animation: fadein 0.5s, fadeout 0.5s 3s;
+}
+
+/* Animations */
+@keyframes fadein {
+    from {top: 0; opacity: 0;}
+    to {top: 20px; opacity: 1;}
+}
+
+@keyframes fadeout {
+    from {top: 20px; opacity: 1;}
+    to {top: 0; opacity: 0;}
+}
+</style>
+
 </head>
 <body>
 
@@ -155,13 +192,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <a href="view-plant.php?id=<?= $userPlantID ?>" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Back to Plant</a>
 </div>
 
-<?php if ($error): ?>
 
-
-<div class="message-box error"><?= $error ?></div>
-
-
-<?php endif; ?>
 
 <div class="plant-detail-container">
 
@@ -214,6 +245,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <p style="text-align:center;margin-top:30px;">© BloomLog 2025. All rights reserved.</p>
     </div>
 </footer>
+    <div id="toast"></div>
+<script>
+<?php if (!empty($error)): ?>
+    var toast = document.getElementById("toast");
+    toast.textContent = "<?= $error ?>";
+    toast.className = "show";
+
+    setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3500);
+<?php endif; ?>
+</script>
 
 </body>
 </html>
